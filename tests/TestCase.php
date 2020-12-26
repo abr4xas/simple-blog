@@ -33,9 +33,14 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_simple_blog_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+
+        include_once __DIR__.'/../database/migrations/create_users_table.php.stub';
+        include_once __DIR__.'/../database/migrations/create_articles_table.php.stub';
+        include_once __DIR__.'/../database/migrations/create_categories_table.php.stub';
+
+
+        (new \CreateUsersTable())->up();
+        (new \CreateArticlesTable())->up();
+        (new \CreateCategoriesTable())->up();
     }
 }

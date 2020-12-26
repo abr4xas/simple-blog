@@ -9,7 +9,6 @@ class SimpleBlogServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-
             $this->publishes([
                 __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             ], 'views');
@@ -34,7 +33,7 @@ class SimpleBlogServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/simple-blog.php', 'simple-blog');
+        //
     }
 
     public static function migrationFileExists(string $migrationFileName): bool
