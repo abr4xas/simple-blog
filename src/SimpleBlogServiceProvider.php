@@ -2,11 +2,19 @@
 
 namespace Abr4xas\SimpleBlog;
 
+use Abr4xas\SimpleBlog\Commands\InstallSimpleBlogCommand;
 use Illuminate\Support\ServiceProvider;
 
 class SimpleBlogServiceProvider extends ServiceProvider
 {
     public function boot(): void
+    {
+        $this
+            ->registerPublishables()
+            ->registerCommands();
+    }
+
+    protected function registerPublishables(): self
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -28,12 +36,27 @@ class SimpleBlogServiceProvider extends ServiceProvider
             }
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'simple-blog');
+        return $this;
     }
 
-    public function register()
+    protected function registerCommands(): self
     {
-        //
+        if (! $this->app->runningInConsole()) {
+            return $this;
+        }
+
+        $this->commands([
+            InstallSimpleBlogCommand::class,
+        ]);
+
+        return $this;
+    }
+
+    protected function registerViews(): self
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'simple-blog');
+
+        return $this;
     }
 
     public static function migrationFileExists(string $migrationFileName): bool

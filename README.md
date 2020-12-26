@@ -19,8 +19,7 @@ composer require abr4xas/simple-blog
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="migrations"
-php artisan migrate
+php artisan simpleblog:install
 ```
 
 ## Usage
