@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace Abr4xas\SimpleBlog\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class SimpleBlogCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'simple-blog';
 
     public $description = 'My command';
 
