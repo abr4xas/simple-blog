@@ -53,10 +53,7 @@
         "laravel": {
             "providers": [
                 "Abr4xas\\SimpleBlog\\SimpleBlogServiceProvider"
-            ],
-            "aliases": {
-                "SimpleBlog": "Abr4xas\\SimpleBlog\\SimpleBlogFacade"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

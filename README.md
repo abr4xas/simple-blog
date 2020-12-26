@@ -55,6 +55,21 @@ public function __construct()
 }
 ```
 
+add this to your user model:
+
+```php
+// use Illuminate\Database\Eloquent\Relations\HasMany;
+public function articles(): HasMany
+{
+    return $this->hasMany(Article::class);
+}
+
+public function publish($post)
+{
+    $this->articles()->save($post);
+}
+```
+
 
 ## Testing
 
