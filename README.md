@@ -23,19 +23,13 @@ php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvi
 php artisan migrate
 ```
 
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="config"
-```
+## Usage
 
-This is the contents of the published config file:
+add this trait to your model
 
 ```php
-return [
-];
+use \Abr4xas\SimpleBlog\Traits\HasArticle;
 ```
-
-## Usage
 
 register custom middleware:
 

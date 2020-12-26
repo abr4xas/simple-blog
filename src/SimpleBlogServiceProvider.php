@@ -9,9 +9,6 @@ class SimpleBlogServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/simple-blog.php' => config_path('simple-blog.php'),
-            ], 'config');
 
             $this->publishes([
                 __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),

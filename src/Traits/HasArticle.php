@@ -3,7 +3,7 @@ namespace Abr4xas\SimpleBlog\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait HasPost
+trait HasArticle
 {
     public function posts(): MorphMany
     {
