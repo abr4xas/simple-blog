@@ -3,7 +3,10 @@
 namespace Abr4xas\SimpleBlog;
 
 use Abr4xas\SimpleBlog\Commands\InstallSimpleBlogCommand;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\SplFileInfo;
 
 class SimpleBlogServiceProvider extends ServiceProvider
 {
@@ -17,9 +20,13 @@ class SimpleBlogServiceProvider extends ServiceProvider
     protected function registerPublishables(): self
     {
         if ($this->app->runningInConsole()) {
+            // $this->publishes([
+            //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
+            // ], 'views');
+
             $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
-            ], 'views');
+                $this->publishControllers(),
+            ], 'controllers');
 
             $migrationFileNames = [
                 'create_articles_table.php',
@@ -69,5 +76,29 @@ class SimpleBlogServiceProvider extends ServiceProvider
         }
 
         return false;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function publishControllers(): void
+    {
+        if (! is_dir($directory = app_path('Http/Controllers/Front/Articles'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filesystem = new Filesystem;
+
+        dd($filesystem->allFiles(__DIR__ . '/../stubs/Controllers'));
+
+        collect($filesystem->allFiles('../'.__DIR__.'/stubs/Controllers'))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Front/Articles/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
     }
 }
