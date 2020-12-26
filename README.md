@@ -37,10 +37,24 @@ return [
 
 ## Usage
 
+register custom middleware:
+
 ```php
-$simple-blog = new Abr4xas\SimpleBlog();
-echo $simple-blog->echoPhrase('Hello, Abr4xas!');
+// app/Http/Kernel.php
+protected $routeMiddleware = [
+    ...
+	'is.live' => \Abr4xas\SimpleBlog\Middleware\Is\Live::class,
+];
 ```
+then in your `ArticleShowController` add this:
+
+```php
+public function __construct()
+{
+	$this->middleware(['is.live:article']);
+}
+```
+
 
 ## Testing
 
