@@ -24,17 +24,13 @@ class SimpleBlogServiceProvider extends ServiceProvider
                 'add_category_id_to_articles_table.php',
             ];
 
-            foreach ($migrationFileNames as $key => $value) {
+            foreach ($migrationFileNames as $key) {
                 if (! $this->migrationFileExists($key)) {
                     $this->publishes([
                         __DIR__ . "/../database/migrations/{$key}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $key),
                     ], 'migrations');
                 }
             }
-
-            $this->commands([
-                SimpleBlogCommand::class,
-            ]);
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'simple-blog');

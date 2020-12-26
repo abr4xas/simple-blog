@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Abr4xas\SimpleBlog\Traits\{LiveAware, Sluggable};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Article extends Model
 {
@@ -22,10 +23,10 @@ class Article extends Model
 		'file',
     ];
 
-	public function user(): BelongsTo
+    public function author(): MorphTo
     {
-        return $this->belongsTo(User::class);
-	}
+        return $this->morphTo();
+    }
 
 	public function category(): BelongsTo
     {

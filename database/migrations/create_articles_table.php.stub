@@ -22,9 +22,8 @@ class CreateArticlesTable extends Migration
             $table->enum('status', ['PUBLISHED', 'DRAFT'])->default('DRAFT');
             $table->string('file')->nullable();
 
-			$table->foreignId('user_id')
-                ->references('id')
-				->on('users');
+            $table->unsignedBigInteger('author_id');
+            $table->string('author_type');
 
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 namespace Abr4xas\SimpleBlog\Middleware\Is;
 
 use Closure;
+use Abr4xas\SimpleBlog\Models\Article;
 
 class Live
 {
@@ -12,7 +13,7 @@ class Live
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $model)
+    public function handle($request, Closure $next, Article $model)
     {
 
 		if ($request->{$model}->isNotLive()) {
