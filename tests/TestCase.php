@@ -2,9 +2,9 @@
 
 namespace Abr4xas\SimpleBlog\Tests;
 
+use Abr4xas\SimpleBlog\SimpleBlogServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Abr4xas\SimpleBlog\SimpleBlogServiceProvider;
 
 class TestCase extends Orchestra
 {

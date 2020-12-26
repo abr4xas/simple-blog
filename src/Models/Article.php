@@ -2,25 +2,26 @@
 
 namespace Abr4xas\SimpleBlog\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Abr4xas\SimpleBlog\Traits\{LiveAware, Sluggable};
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Abr4xas\SimpleBlog\Traits\LiveAware;
+use Abr4xas\SimpleBlog\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Article extends Model
 {
-	use HasFactory,
-		LiveAware,
-		Sluggable;
+    use HasFactory;
+    use LiveAware;
+    use Sluggable;
 
-	protected $fillable = [
+    protected $fillable = [
         'title',
         'slug',
         'excerpt',
         'body',
         'status',
-		'file',
+        'file',
     ];
 
     public function author(): MorphTo
@@ -28,31 +29,42 @@ class Article extends Model
         return $this->morphTo();
     }
 
-	public function category(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-	}
+    }
 
-    public function related()
+    /**
+     * Undocumented function
+     *
+     * @return array
+     */
+    public function related(): array
     {
         $postId = $this->id;
 
-        $min    = self::where('id', '<', $postId)
+        $min = self::where('id', '<', $postId)
                     ->live()
                     ->max('id');
-        $max    = self::where('id', '>', $postId)
+        $max = self::where('id', '>', $postId)
                     ->live()
                     ->min('id');
 
-        $previous   = self::whereId($min)->first();
-        $next       = self::whereId($max)->first();
+        $previous = self::whereId($min)->first();
+        $next = self::whereId($max)->first();
 
         return [
-            'previous'  => $previous,
-            'next'      => $next
+            'previous' => $previous,
+            'next' => $next,
         ];
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     * @psalm-suppress MissingParamType
+     */
     public function scopeFilter($query, $filters)
     {
         if (isset($filters['month'])) {
@@ -65,20 +77,24 @@ class Article extends Model
                 $query->whereYear('created_at', $year);
             }
         }
-	}
+    }
 
-	public function content()
+    /**
+     * Undocumented function
+     *
+     * @psalm-suppress MissingReturnType
+     * @psalm-suppress MissingClosureReturnType
+     */
+    public function content()
     {
+        if (config('app.env') != 'local') {
+            $key = 'article_'.$this->id.'_'.hash('md5', $this->body);
 
-		if (config('app.env') != 'local') {
-
-			$key = 'article_'.$this->id.'_'.hash('md5', $this->body);
-
-			return \Illuminate\Support\Facades\Cache::remember($key, 86400, function () {
-				return \Sinnbeck\Markdom\Facades\Markdom::toHtml($this->body);
-			});
-		}
+            return \Illuminate\Support\Facades\Cache::remember($key, 86400, function () {
+                return \Sinnbeck\Markdom\Facades\Markdom::toHtml($this->body);
+            });
+        }
 
         return \Sinnbeck\Markdom\Facades\Markdom::toHtml($this->body);
-	}
+    }
 }

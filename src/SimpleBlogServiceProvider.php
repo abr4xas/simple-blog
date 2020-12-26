@@ -3,11 +3,10 @@
 namespace Abr4xas\SimpleBlog;
 
 use Illuminate\Support\ServiceProvider;
-use Abr4xas\SimpleBlog\Commands\SimpleBlogCommand;
 
 class SimpleBlogServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([

@@ -1,8 +1,8 @@
 <?php
 namespace Abr4xas\SimpleBlog\Middleware\Is;
 
-use Closure;
 use Abr4xas\SimpleBlog\Models\Article;
+use Closure;
 
 class Live
 {
@@ -12,13 +12,13 @@ class Live
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     * @psalm-suppress MissingParamType
      */
     public function handle($request, Closure $next, Article $model)
     {
-
-		if ($request->{$model}->isNotLive()) {
-			return abort(404);
-		}
+        if ($request->{$model}->isNotLive()) {
+            return abort(404);
+        }
 
         return $next($request);
     }
