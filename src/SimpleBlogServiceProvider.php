@@ -21,18 +21,9 @@ class SimpleBlogServiceProvider extends ServiceProvider
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
 
-            $migrationFileNames = [
-                'create_articles_table.php',
-                'create_categories_table.php',
-            ];
-
-            foreach ($migrationFileNames as $key) {
-                if (! $this->migrationFileExists($key)) {
-                    $this->publishes([
-                        __DIR__ . "/../database/migrations/{$key}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $key),
-                    ], 'simpleblog-migrations');
-                }
-            }
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'simpleblog-migrations');
 
             $this->publishes([
                 __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
@@ -53,17 +44,5 @@ class SimpleBlogServiceProvider extends ServiceProvider
     {
         $router = $this->app->make(\Illuminate\Routing\Router::class);
         $router->aliasMiddleware('is.live', \Abr4xas\SimpleBlog\Middleware\Is\Live::class);
-    }
-
-    public static function migrationFileExists(string $migrationFileName): bool
-    {
-        $len = strlen($migrationFileName);
-        foreach (glob(database_path("migrations/*.php")) as $filename) {
-            if ((substr($filename, -$len) === $migrationFileName)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
