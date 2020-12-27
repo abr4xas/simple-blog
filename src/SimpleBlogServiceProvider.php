@@ -20,14 +20,13 @@ class SimpleBlogServiceProvider extends ServiceProvider
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
 
-            $this->publishes([
-                $this->publishControllers(),
-            ], 'controllers');
+            // $this->publishes([
+            //     $this->publishControllers(),
+            // ], 'controllers');
 
             $migrationFileNames = [
                 'create_articles_table.php',
                 'create_categories_table.php',
-                'add_category_id_to_articles_table.php',
             ];
 
             foreach ($migrationFileNames as $key) {
