@@ -7,7 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\SplFileInfo;
 
-
 class InstallSimpleBlogCommand extends Command
 {
     public $signature = 'simpleblog:install';
@@ -41,6 +40,5 @@ class InstallSimpleBlogCommand extends Command
                     app_path('Http/Controllers/Front/Articles/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
-
     }
 }
