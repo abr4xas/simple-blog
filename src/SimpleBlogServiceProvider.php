@@ -28,6 +28,10 @@ class SimpleBlogServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
             ], 'simpleblog-controllers');
+
+            $this->publishes([
+                __DIR__.'/Models' => app_path('Models'),
+            ], 'simpleblog-models');
         }
 
         return $this;
