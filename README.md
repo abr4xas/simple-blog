@@ -1,11 +1,13 @@
+<p align="center">
+	<img src="simple-blog.png" width="1028">
+</p>
+
+
 # Laravel package to handle a simple blog
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/abr4xas/simple-blog/run-tests?label=tests)](https://github.com/abr4xas/simple-blog/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/abr4xas/simple-blog/Tests?style=flat-square)](https://github.com/abr4xas/simple-blog/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
-
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 
 ## Installation
@@ -23,7 +25,7 @@ php artisan simpleblog:install
 ```
 
 ## Usage
-
+// todo
 
 ## Testing
 
