@@ -1,1 +1,1 @@
-Route::get('/post/{article:slug}', App\Http\Controllers\Front\Article\ArticleShowController::class)->name('article.detail');
+Route::get('/post/{article:slug}', App\Http\Controllers\Front\Articles\ArticleShowController::class)->name('article.detail');
