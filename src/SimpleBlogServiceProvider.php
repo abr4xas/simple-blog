@@ -25,14 +25,14 @@ class SimpleBlogServiceProvider extends ServiceProvider
             // ], 'controllers');
 
             $migrationFileNames = [
-                'create_articles_table.php',
-                'create_categories_table.php',
+                '2020_12_27_002625_create_articles_table.php',
+                '2020_12_27_002626_create_categories_table.php',
             ];
 
             foreach ($migrationFileNames as $key) {
                 if (! $this->migrationFileExists($key)) {
                     $this->publishes([
-                        __DIR__ . "/../database/migrations/{$key}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $key),
+                        __DIR__ . "/../database/migrations/{$key}.stub" => database_path('migrations/' . $key),
                     ], 'migrations');
                 }
             }
