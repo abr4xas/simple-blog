@@ -2,16 +2,13 @@
 
 namespace Abr4xas\SimpleBlog;
 
-use Abr4xas\SimpleBlog\Commands\InstallSimpleBlogCommand;
 use Illuminate\Support\ServiceProvider;
 
 class SimpleBlogServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this
-            ->registerPublishables()
-            ->registerCommands();
+        $this->registerPublishables();
 
         $this->registerCustomMiddleware();
     }
@@ -19,6 +16,7 @@ class SimpleBlogServiceProvider extends ServiceProvider
     protected function registerPublishables(): self
     {
         if ($this->app->runningInConsole()) {
+
             // $this->publishes([
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
@@ -32,23 +30,14 @@ class SimpleBlogServiceProvider extends ServiceProvider
                 if (! $this->migrationFileExists($key)) {
                     $this->publishes([
                         __DIR__ . "/../database/migrations/{$key}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $key),
-                    ], 'migrations');
+                    ], 'simpleblog-migrations');
                 }
             }
+
+            $this->publishes([
+                __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
+            ], 'simpleblog-controllers');
         }
-
-        return $this;
-    }
-
-    protected function registerCommands(): self
-    {
-        if (! $this->app->runningInConsole()) {
-            return $this;
-        }
-
-        $this->commands([
-            InstallSimpleBlogCommand::class,
-        ]);
 
         return $this;
     }
