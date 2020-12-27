@@ -27,8 +27,8 @@ class ArticleShowController extends Controller
 			'category'
 		]);
 
-		$related = $article->related();
+        // $related = $article->related();
 
-        return view('change.this', compact('article', 'related'));
+        return $article;
     }
 }

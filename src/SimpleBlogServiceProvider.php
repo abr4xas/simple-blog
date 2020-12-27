@@ -12,6 +12,8 @@ class SimpleBlogServiceProvider extends ServiceProvider
         $this
             ->registerPublishables()
             ->registerCommands();
+
+        $this->registerCustomMiddleware();
     }
 
     protected function registerPublishables(): self
@@ -56,6 +58,12 @@ class SimpleBlogServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'simple-blog');
 
         return $this;
+    }
+
+    protected function registerCustomMiddleware(): void
+    {
+        $router = $this->app->make(\Illuminate\Routing\Router::class);
+        $router->aliasMiddleware('is.live', \Abr4xas\SimpleBlog\Middleware\Is\Live::class);
     }
 
     public static function migrationFileExists(string $migrationFileName): bool

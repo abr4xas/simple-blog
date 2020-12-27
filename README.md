@@ -24,29 +24,6 @@ php artisan simpleblog:install
 
 ## Usage
 
-add this trait to your model
-
-```php
-use \Abr4xas\SimpleBlog\Traits\HasArticle;
-```
-
-register custom middleware:
-
-```php
-// app/Http/Kernel.php
-protected $routeMiddleware = [
-    ...
-	'is.live' => \Abr4xas\SimpleBlog\Middleware\Is\Live::class,
-];
-```
-then in your `ArticleShowController` add this:
-
-```php
-public function __construct()
-{
-	$this->middleware(['is.live:article']);
-}
-```
 
 ## Testing
 

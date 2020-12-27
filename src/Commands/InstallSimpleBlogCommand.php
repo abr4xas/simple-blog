@@ -26,6 +26,7 @@ class InstallSimpleBlogCommand extends Command
 
         $this->call('migrate');
 
+        $this->info('Publishing controller...');
 
         if (! is_dir($directory = app_path('Http/Controllers/Front/Articles'))) {
             mkdir($directory, 0755, true);
@@ -40,5 +41,13 @@ class InstallSimpleBlogCommand extends Command
                     app_path('Http/Controllers/Front/Articles/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
+
+        $this->info('Publishing route...');
+
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(__DIR__.'/../../stubs/Routes/routes.stub'),
+            FILE_APPEND
+        );
     }
 }
