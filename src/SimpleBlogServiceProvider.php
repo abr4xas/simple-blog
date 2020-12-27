@@ -21,10 +21,6 @@ class SimpleBlogServiceProvider extends ServiceProvider
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
 
-            // $this->publishes([
-            //     $this->publishControllers(),
-            // ], 'controllers');
-
             $migrationFileNames = [
                 'create_articles_table.php',
                 'create_categories_table.php',
@@ -72,27 +68,5 @@ class SimpleBlogServiceProvider extends ServiceProvider
         }
 
         return false;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected function publishControllers(): void
-    {
-        if (! is_dir($directory = app_path('Http/Controllers/Front/Articles'))) {
-            mkdir($directory, 0755, true);
-        }
-
-        $filesystem = new Filesystem;
-
-        collect($filesystem->allFiles(__DIR__.'/../stubs/Controllers'))
-            ->each(function (SplFileInfo $file) use ($filesystem) {
-                $filesystem->copy(
-                    $file->getPathname(),
-                    app_path('Http/Controllers/Front/Articles/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
-                );
-            });
     }
 }

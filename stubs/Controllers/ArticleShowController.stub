@@ -29,6 +29,6 @@ class ArticleShowController extends Controller
 
 		$related = $article->related();
 
-        return view('components.front.article.show', compact('article', 'related'));
+        return view('change.this', compact('article', 'related'));
     }
 }
