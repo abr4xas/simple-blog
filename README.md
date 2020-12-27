@@ -6,7 +6,7 @@
 # Laravel package to handle a simple blog
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/abr4xas/simple-blog/Tests?style=flat-square)](https://github.com/abr4xas/simple-blog/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/abr4xas/simple-blog/Tests/master?label=Tests&style=flat-square)](https://github.com/abr4xas/simple-blog/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
 
 
