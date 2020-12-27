@@ -3,11 +3,7 @@
 namespace Abr4xas\SimpleBlog;
 
 use Abr4xas\SimpleBlog\Commands\InstallSimpleBlogCommand;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Symfony\Component\Finder\SplFileInfo;
-
 class SimpleBlogServiceProvider extends ServiceProvider
 {
     public function boot(): void
@@ -91,9 +87,7 @@ class SimpleBlogServiceProvider extends ServiceProvider
 
         $filesystem = new Filesystem;
 
-        dd($filesystem->allFiles(__DIR__ . '/../stubs/Controllers'));
-
-        collect($filesystem->allFiles('../'.__DIR__.'/stubs/Controllers'))
+        collect($filesystem->allFiles(__DIR__.'/../stubs/Controllers'))
             ->each(function (SplFileInfo $file) use ($filesystem) {
                 $filesystem->copy(
                     $file->getPathname(),
