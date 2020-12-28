@@ -3,9 +3,12 @@ namespace Abr4xas\SimpleBlog\Tests\Unit;
 
 use Abr4xas\SimpleBlog\Models\Article;
 use Abr4xas\SimpleBlog\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleTest extends TestCase
 {
+    // use RefreshDatabase;
+
     /** @test */
     public function test_it_has_an_author_type()
     {
