@@ -27,8 +27,6 @@ class CreateArticlesTable extends Migration
                 ->references('id')
 				->on('categories');
 
-            $table->morphs('author');
-
             $table->timestamps();
         });
     }
