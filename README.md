@@ -21,14 +21,14 @@ composer require abr4xas/simple-blog
 You can publish and run the migrations and everything else with:
 
 ```bash
-php artisan simpleblog:install
+php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-migrations"
+php artisan migrate
+
+php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-controllers"
 ```
 
 ## Usage
 This package uses a polymorphic relationship to associate the Items model with the model of your choice, the only thing you have to do is add the following trait: `Abr4xas\SimpleBlog\Traits\HasArticle` to the model you want to use.
-
-Then what you need to do is create a view to show the post since there is a controller published in your application ready to use you can find it in: `Http/Controllers/Front/Articles/`
-
 
 
 ## Testing
