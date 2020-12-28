@@ -21,12 +21,6 @@ class CreateArticlesTable extends Migration
             $table->longText('body');
             $table->enum('status', ['PUBLISHED', 'DRAFT'])->default('DRAFT');
             $table->string('file')->nullable();
-
-			$table->foreignId('category_id')
-				->nullable()
-                ->references('id')
-				->on('categories');
-
             $table->timestamps();
         });
     }

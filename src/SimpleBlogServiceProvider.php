@@ -21,11 +21,9 @@ class SimpleBlogServiceProvider extends ServiceProvider
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
 
-            if (! file_exists(database_path('migrations/2020_12_27_000000_create_categories_table.php'))) {
-                $this->publishes([
-                    __DIR__.'/../database/migrations' => database_path('migrations'),
-                ], 'simpleblog-migrations');
-            }
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'simpleblog-migrations');
 
             $this->publishes([
                 __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
