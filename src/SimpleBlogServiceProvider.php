@@ -8,7 +8,8 @@ class SimpleBlogServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->registerPublishables();
+        $this->registerPublishables()
+            ->publishRoute();
 
         $this->registerCustomMiddleware();
     }
@@ -21,16 +22,25 @@ class SimpleBlogServiceProvider extends ServiceProvider
             //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
             // ], 'views');
 
-            if (! file_exists(database_path('migrations/2020_12_27_000000_create_categories_table.php'))) {
-                $this->publishes([
-                    __DIR__.'/../database/migrations' => database_path('migrations'),
-                ], 'simpleblog-migrations');
-            }
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'simpleblog-migrations');
 
             $this->publishes([
                 __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
             ], 'simpleblog-controllers');
         }
+
+        return $this;
+    }
+
+    protected function publishRoute(): self
+    {
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(__DIR__.'/../stubs/Routes/routes.stub'),
+            FILE_APPEND
+        );
 
         return $this;
     }
