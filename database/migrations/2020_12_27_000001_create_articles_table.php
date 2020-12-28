@@ -27,8 +27,7 @@ class CreateArticlesTable extends Migration
                 ->references('id')
 				->on('categories');
 
-            $table->unsignedBigInteger('author_id');
-            $table->string('author_type');
+            $table->morphs('author');
 
             $table->timestamps();
         });
