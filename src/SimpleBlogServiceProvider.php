@@ -8,8 +8,7 @@ class SimpleBlogServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->registerPublishables()
-            ->publishRoute();
+        $this->registerPublishables();
 
         $this->registerCustomMiddleware();
     }
@@ -28,21 +27,23 @@ class SimpleBlogServiceProvider extends ServiceProvider
 
             $this->publishes([
                 __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
-            ], 'simpleblog-controllers');
+			], 'simpleblog-controllers');
+
+            $this->publishes([
+                $this->publishRoute()
+            ], 'simpleblog-route');
         }
 
         return $this;
     }
 
-    protected function publishRoute(): self
+    protected function publishRoute(): void
     {
         file_put_contents(
             base_path('routes/web.php'),
             file_get_contents(__DIR__.'/../stubs/Routes/routes.stub'),
             FILE_APPEND
         );
-
-        return $this;
     }
 
     protected function registerViews(): self
