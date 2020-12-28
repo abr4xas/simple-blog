@@ -31,7 +31,7 @@ class Article extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Category::class);
+        return $this->belongsTo(\Abr4xas\SimpleBlog\Models\Category::class);
     }
 
     /**
