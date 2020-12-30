@@ -20,7 +20,7 @@ class Article extends Model
         'excerpt',
         'body',
         'status',
-		'file',
+        'file',
     ];
 
     public function author(): MorphTo
