@@ -17,7 +17,6 @@ class Article extends Model
 
     protected $fillable = [
         'title',
-        'slug',
         'excerpt',
         'body',
         'status',
@@ -31,7 +30,7 @@ class Article extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(\Abr4xas\SimpleBlog\Models\Category::class);
+        return $this->belongsTo(\Abr4xas\SimpleBlog\Models\Category::class, 'category_id');
     }
 
     /**
