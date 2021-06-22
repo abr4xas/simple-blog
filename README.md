@@ -31,6 +31,10 @@ php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvi
 
 This package uses a polymorphic relationship to associate the Items model with the model of your choice, the only thing you have to do is add the following trait: `Abr4xas\SimpleBlog\Traits\HasArticle` to the model you want to use.
 
+### Syntax highlighting
+
+See this: https://highlightjs.org/
+
 ## Testing
 
 ```bash
