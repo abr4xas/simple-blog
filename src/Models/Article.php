@@ -2,6 +2,7 @@
 
 namespace Abr4xas\SimpleBlog\Models;
 
+use Abr4xas\SimpleBlog\Services\CommonMark;
 use Abr4xas\SimpleBlog\Traits\LiveAware;
 use Abr4xas\SimpleBlog\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -90,10 +91,12 @@ class Article extends Model
             $key = 'article_'.$this->id.'_'.hash('md5', $this->body);
 
             return \Illuminate\Support\Facades\Cache::remember($key, 86400, function () {
-                return \Sinnbeck\Markdom\Facades\Markdom::toHtml($this->body);
+                return CommonMark::convertToHtml($this->body);
             });
         }
 
-        return \Sinnbeck\Markdom\Facades\Markdom::toHtml($this->body);
+        if (config('app.env') === 'local') {
+            return CommonMark::convertToHtml($this->body);
+        }
     }
 }

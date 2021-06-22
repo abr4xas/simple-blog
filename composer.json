@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/contracts": "^8.0",
-        "sinnbeck/markdom": "^1.1",
+        "spatie/commonmark-highlighter": "^2.1",
         "spatie/laravel-sluggable": "^2.6"
     },
     "require-dev": {
