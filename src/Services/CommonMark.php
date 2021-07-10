@@ -11,10 +11,9 @@ use Spatie\CommonMarkHighlighter\IndentedCodeRenderer;
 
 class CommonMark
 {
-    public static function convertToHtml($markdown)
-    {
-        $languages = ['html', 'php', 'js', 'yaml', 'bash', 'xml'];
 
+    public static function convertToHtml($markdown, $languages = ['html', 'php', 'js', 'yaml', 'bash', 'xml'])
+    {
         $environment = Environment::createCommonMarkEnvironment();
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
         $environment->addBlockRenderer(FencedCode::class, new FencedCodeRenderer($languages));

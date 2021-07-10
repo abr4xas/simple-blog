@@ -15,7 +15,9 @@
 You can install the package via composer:
 
 ```bash
-composer require abr4xas/simple-blog
+composer require abr4xas/simple-blog // php 8
+composer require abr4xas/simple-blog:2.X // php 7.X
+
 ```
 
 You can publish and run the migrations and everything else with:
