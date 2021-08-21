@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/contracts": "^8.0",
-        "spatie/commonmark-highlighter": "^2.1",
+        "spatie/commonmark-highlighter": "^3.0",
         "spatie/laravel-sluggable": "^3.1"
     },
     "require-dev": {
