@@ -1,11 +1,12 @@
 <?php
 namespace Abr4xas\SimpleBlog\Services;
 
-use League\CommonMark\Block\Element\FencedCode;
-use League\CommonMark\Block\Element\IndentedCode;
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
+use League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\MarkdownConverter;
 use Spatie\CommonMarkHighlighter\FencedCodeRenderer;
 use Spatie\CommonMarkHighlighter\IndentedCodeRenderer;
 
@@ -13,12 +14,13 @@ class CommonMark
 {
     public static function convertToHtml($markdown, $languages = ['html', 'php', 'js', 'yaml', 'bash', 'xml'])
     {
-        $environment = Environment::createCommonMarkEnvironment();
+        $environment = new Environment();
+        $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
-        $environment->addBlockRenderer(FencedCode::class, new FencedCodeRenderer($languages));
-        $environment->addBlockRenderer(IndentedCode::class, new IndentedCodeRenderer($languages));
+        $environment->addRenderer(FencedCode::class, new FencedCodeRenderer($languages));
+        $environment->addRenderer(IndentedCode::class, new IndentedCodeRenderer($languages));
 
-        $commonMarkConverter = new CommonMarkConverter([], $environment);
+        $commonMarkConverter = new MarkdownConverter($environment);
 
         return $commonMarkConverter->convertToHtml($markdown);
     }
