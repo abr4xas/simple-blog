@@ -17,10 +17,6 @@ class SimpleBlogServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
 
-            // $this->publishes([
-            //     __DIR__ . '/../resources/views' => base_path('resources/views/vendor/simple-blog'),
-            // ], 'views');
-
             $this->publishes([
                 __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'simpleblog-migrations');
