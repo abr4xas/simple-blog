@@ -16,7 +16,6 @@ class SimpleBlogServiceProvider extends ServiceProvider
     protected function registerPublishables(): self
     {
         if ($this->app->runningInConsole()) {
-
             $this->publishes([
                 __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'simpleblog-migrations');
