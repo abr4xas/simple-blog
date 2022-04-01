@@ -2,37 +2,26 @@
 
 namespace Abr4xas\SimpleBlog;
 
-use Illuminate\Support\ServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SimpleBlogServiceProvider extends ServiceProvider
+class SimpleBlogServiceProvider extends PackageServiceProvider
 {
-    public function boot(): void
+    public function configurePackage(Package $package): void
     {
-        $this->registerPublishables();
-
-        $this->registerCustomMiddleware();
-    }
-
-    protected function registerPublishables(): self
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
-            ], 'simpleblog-migrations');
-
-            $this->publishes([
-                __DIR__.'/../stubs/Controllers' => app_path('Http/Controllers/Front/Articles'),
-            ], 'simpleblog-controllers');
-        }
-
-        return $this;
-    }
-
-    protected function registerViews(): self
-    {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'simple-blog');
-
-        return $this;
+        /*
+         * This class is a Package Service Provider
+         *
+         * More info: https://github.com/spatie/laravel-package-tools
+         */
+        $package
+            ->name('simple-blog')
+            ->hasMigrations([
+                'create_articles_table',
+                'create_categories_table',
+                'add_category_id_to_articles_table',
+                'add_morph_to_columns_to_articles_table',
+            ]);
     }
 
     protected function registerCustomMiddleware(): void

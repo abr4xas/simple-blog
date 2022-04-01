@@ -2,19 +2,20 @@
 
 namespace Abr4xas\SimpleBlog\Models;
 
-use Abr4xas\SimpleBlog\Services\CommonMark;
+use Illuminate\Database\Eloquent\Model;
 use Abr4xas\SimpleBlog\Traits\LiveAware;
 use Abr4xas\SimpleBlog\Traits\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Abr4xas\SimpleBlog\Traits\GenerateMarkDown;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
     use HasFactory;
     use LiveAware;
     use Sluggable;
+    use GenerateMarkDown;
 
     protected $fillable = [
         'title',
@@ -87,16 +88,16 @@ class Article extends Model
      */
     public function content()
     {
-        if (config('app.env') != 'local') {
-            $key = 'article_'.$this->id.'_'.hash('md5', $this->body);
+        if (app()->environment('production')) {
+            $key = 'article_' . $this->id . '_' . hash('md5', $this->body);
 
             return \Illuminate\Support\Facades\Cache::remember($key, 86400, function () {
-                return CommonMark::convertToHtml($this->body);
+                return self::convertToHtml($this->body);
             });
         }
 
-        if (config('app.env') === 'local') {
-            return CommonMark::convertToHtml($this->body);
+        if (app()->environment('local')) {
+            return self::convertToHtml($this->body);
         }
     }
 }

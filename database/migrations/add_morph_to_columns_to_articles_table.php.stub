@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMorphToColumnsToArticlesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddMorphToColumnsToArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-			$table->nullableMorphs('author');
+            $table->nullableMorphs('author');
         });
     }
 
@@ -29,4 +29,4 @@ class AddMorphToColumnsToArticlesTable extends Migration
             $table->dropMorphs('author');
         });
     }
-}
+};

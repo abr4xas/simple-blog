@@ -8,7 +8,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -26,23 +26,19 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
+        config()->set('database.default', 'testing');
 
-        include_once __DIR__.'/../database/migrations/2020_11_16_025332_create_articles_table.php';
-        include_once __DIR__.'/../database/migrations/2020_11_16_210105_create_categories_table.php';
-        include_once __DIR__.'/../database/migrations/2020_11_16_210339_add_category_id_to_articles_table.php';
-        include_once __DIR__.'/../database/migrations/2020_12_27_000002_add_morph_to_columns_to_articles_table.php';
-        include_once __DIR__.'/database/migrations/create_users_table.php.stub';
+        $create_users_table = include __DIR__ .'/database/migrations/create_users_table.php.stub';
+        $create_articles_table = include __DIR__.'/../database/migrations/create_articles_table.php.stub';
+        $create_categories_table = include __DIR__.'/../database/migrations/create_categories_table.php.stub';
+        $add_category_id_to_articles_table = include __DIR__.'/../database/migrations/add_category_id_to_articles_table.php.stub';
+        $add_morph_to_columns_to_articles_table = include __DIR__.'/../database/migrations/add_morph_to_columns_to_articles_table.php.stub';
 
-        (new \CreateUsersTable())->up();
-        (new \CreateArticlesTable())->up();
-        (new \AddMorphToColumnsToArticlesTable())->up();
-        (new \CreateCategoriesTable())->up();
-        (new \AddCategoryIdToArticlesTable())->up();
+
+        $create_users_table->up();
+        $create_articles_table->up();
+        $create_categories_table->up();
+        $add_category_id_to_articles_table->up();
+        $add_morph_to_columns_to_articles_table->up();
     }
 }
