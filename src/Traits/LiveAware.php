@@ -13,7 +13,7 @@ trait LiveAware
      */
     public function scopeLive(Builder $builder)
     {
-        return $builder->whereStatus('PUBLISHED');
+        return $builder->where('status', '=', 'PUBLISHED');
     }
 
     public function isLive(): bool

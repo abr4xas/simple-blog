@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * App\Models\User
+ *
+ * @property string $body
+ * @property string $status
+ */
 class Article extends Model
 {
     use HasFactory;

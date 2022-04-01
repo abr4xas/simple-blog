@@ -15,8 +15,7 @@
 You can install the package via composer:
 
 ```bash
-composer require abr4xas/simple-blog // php 8
-composer require abr4xas/simple-blog:2.X // php 7.X
+composer require abr4xas/simple-blog
 
 ```
 
@@ -26,7 +25,6 @@ You can publish and run the migrations and everything else with:
 php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-migrations"
 php artisan migrate
 
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-controllers"
 ```
 
 ## Usage
@@ -35,7 +33,7 @@ This package uses a polymorphic relationship to associate the Items model with t
 
 ### Syntax highlighting
 
-See this: https://highlightjs.org/
+This package uses: [Torchlight](https://torchlight.dev/docs) CommonMark, so, you need an api key to make it work. Follow this docs: https://torchlight.dev/docs/clients/commonmark-php
 
 ## Testing
 
