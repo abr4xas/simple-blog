@@ -23,7 +23,7 @@ trait GenerateMarkDown
 
         $environment->addExtension(new CommonMarkCoreExtension());
 
-        if (!empty(config()->get('torchlight.token'))) {
+        if (! empty(config()->get('torchlight.token'))) {
             $environment->addExtension(new TorchlightExtension());
         }
 
