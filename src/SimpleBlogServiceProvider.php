@@ -24,7 +24,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             ]);
     }
 
-    protected function registerCustomMiddleware(): void
+    public function packageBooted()
     {
         $router = $this->app->make(\Illuminate\Routing\Router::class);
         $router->aliasMiddleware('is.live', \Abr4xas\SimpleBlog\Middleware\Is\Live::class);

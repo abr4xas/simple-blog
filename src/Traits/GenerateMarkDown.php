@@ -24,8 +24,8 @@ trait GenerateMarkDown
 
         $environment->addExtension(new CommonMarkCoreExtension());
 
-        if (!empty(config()->get('TORCHLIGHT_TOKEN'))) {
-            $environment->addExtension(new TorchlightExtension);
+        if (!empty(config()->get('torchlight.token'))) {
+            $environment->addExtension(new TorchlightExtension());
         }
 
         $environment->addExtension(new AttributesExtension());
