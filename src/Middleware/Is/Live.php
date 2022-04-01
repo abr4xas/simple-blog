@@ -1,4 +1,5 @@
 <?php
+
 namespace Abr4xas\SimpleBlog\Middleware\Is;
 
 use Closure;

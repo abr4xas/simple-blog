@@ -1,4 +1,5 @@
 <?php
+
 namespace Abr4xas\SimpleBlog\Traits;
 
 use Spatie\Sluggable\HasSlug;
@@ -11,7 +12,7 @@ trait Sluggable
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')

@@ -1,4 +1,5 @@
 <?php
+
 namespace Abr4xas\SimpleBlog\Tests\Models;
 
 use Abr4xas\SimpleBlog\Traits\HasArticle;

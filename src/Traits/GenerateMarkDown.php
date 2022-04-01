@@ -2,16 +2,15 @@
 
 namespace Abr4xas\SimpleBlog\Traits;
 
-use League\CommonMark\MarkdownConverter;
 use League\CommonMark\Environment\Environment;
-use Torchlight\Commonmark\V2\TorchlightExtension;
-use League\CommonMark\Output\RenderedContentInterface;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
+use League\CommonMark\Output\RenderedContentInterface;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 trait GenerateMarkDown
 {
-
     /**
      * Undocumented function
      *
@@ -24,8 +23,8 @@ trait GenerateMarkDown
 
         $environment->addExtension(new CommonMarkCoreExtension());
 
-        if (!empty(config()->get('TORCHLIGHT_TOKEN'))) {
-            $environment->addExtension(new TorchlightExtension);
+        if (! empty(config()->get('TORCHLIGHT_TOKEN'))) {
+            $environment->addExtension(new TorchlightExtension());
         }
 
         $environment->addExtension(new AttributesExtension());

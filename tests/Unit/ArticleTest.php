@@ -2,14 +2,12 @@
 
 use Abr4xas\SimpleBlog\Models\Article;
 
-
 test('it has author type', function () {
     $article = Article::factory()->create(['author_type' => 'Fake\User']);
     expect($article->author_type)->toEqual('Fake\User');
 });
 
 test('it user can create a post', function () {
-
     $user = \Abr4xas\SimpleBlog\Tests\Models\User::factory()->create();
 
     $article = $user->articles()->create([
@@ -25,10 +23,8 @@ test('it user can create a post', function () {
 });
 
 test('it article live scope works', function () {
-
     Article::factory()->create(['author_type' => 'Fake\User']);
     $article = Article::live()->first();
 
     expect($article->status)->toBe('PUBLISHED');
-
 });
