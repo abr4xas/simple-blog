@@ -2,13 +2,14 @@
 
 namespace Abr4xas\SimpleBlog\Models;
 
-use Abr4xas\SimpleBlog\Traits\GenerateMarkDown;
+use Illuminate\Database\Eloquent\Model;
 use Abr4xas\SimpleBlog\Traits\LiveAware;
 use Abr4xas\SimpleBlog\Traits\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Abr4xas\SimpleBlog\Traits\GenerateMarkDown;
+use Abr4xas\SimpleBlog\Models\Enums\ArticleStatus;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\User
@@ -29,6 +30,10 @@ class Article extends Model
         'body',
         'status',
         'file',
+    ];
+
+    protected $casts = [
+        'status' => ArticleStatus::class,
     ];
 
     public function author(): MorphTo
@@ -72,7 +77,7 @@ class Article extends Model
      * @return void
      * @psalm-suppress MissingParamType
      */
-    public function scopeFilter($query, $filters)
+    public function scopeFilter($query, array $filters)
     {
         if (isset($filters['month'])) {
             if ($month = $filters['month']) {
@@ -105,5 +110,10 @@ class Article extends Model
         if (app()->environment('local')) {
             return self::convertToHtml($this->body);
         }
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->status->equals(ArticleStatus::PUBLISHED());
     }
 }

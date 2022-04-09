@@ -3,6 +3,7 @@
 namespace Abr4xas\SimpleBlog\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Abr4xas\SimpleBlog\Models\Enums\ArticleStatus;
 
 trait LiveAware
 {
@@ -14,16 +15,6 @@ trait LiveAware
      */
     public function scopeLive(Builder $builder)
     {
-        return $builder->where('status', '=', 'PUBLISHED');
-    }
-
-    public function isLive(): bool
-    {
-        return $this->status === 'PUBLISHED';
-    }
-
-    public function isNotLive(): bool
-    {
-        return ! $this->isLive();
+        return $builder->whereStatus(ArticleStatus::PUBLISHED());
     }
 }

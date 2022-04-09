@@ -18,6 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "spatie/laravel-enum": "^3.0",
         "spatie/laravel-package-tools": "^1.11",
         "spatie/laravel-sluggable": "^3.1",
         "torchlight/torchlight-commonmark": "^0.5.5"
@@ -38,7 +40,10 @@
         "psr-4": {
             "Abr4xas\\SimpleBlog\\": "src",
             "Abr4xas\\SimpleBlog\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/Helper/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

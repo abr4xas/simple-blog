@@ -1,10 +1,11 @@
 <?php
 
 use Abr4xas\SimpleBlog\Models\Article;
+use Illuminate\Database\Eloquent\Builder;
 
 test('it has author type', function () {
-    $article = Article::factory()->create(['author_type' => 'Fake\User']);
-    expect($article->author_type)->toEqual('Fake\User');
+    $article = Article::factory()->withAuthor()->create();
+    expect($article->author_type)->toEqual('Abr4xas\SimpleBlog\Tests\Models\User');
 });
 
 test('it user can create a post', function () {
@@ -22,9 +23,8 @@ test('it user can create a post', function () {
     expect($article)->toBeInstanceOf(Article::class);
 });
 
-test('it article live scope works', function () {
-    Article::factory()->create(['author_type' => 'Fake\User']);
-    $article = Article::live()->first();
+test('it live scope is working', function() {
+    $scope = Article::live();
 
-    expect($article->status)->toBe('PUBLISHED');
+    expect($scope)->toBeInstanceOf(Builder::class);
 });
