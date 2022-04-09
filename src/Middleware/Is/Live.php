@@ -16,7 +16,7 @@ class Live
      */
     public function handle($request, Closure $next, string $model)
     {
-        if ($request->{$model}->isPublished()) {
+        if (!$request->{$model}->isPublished()) {
             return abort(404);
         }
 
