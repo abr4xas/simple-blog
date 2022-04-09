@@ -10,20 +10,20 @@ use Spatie\Enum\Laravel\Enum;
  */
 
  class ArticleStatus extends Enum
-{
-	public function label(): string
-	{
-		return match ($this->value) {
-			self::DRAFT()->value => 'DRAFT',
-			self::PUBLISHED()->value => 'PUBLISHED',
-		};
-	}
+ {
+     public function label(): string
+     {
+         return match ($this->value) {
+             self::DRAFT()->value => 'DRAFT',
+            self::PUBLISHED()->value => 'PUBLISHED',
+         };
+     }
 
-	public function color(): string
-	{
-		return match ($this->value) {
-			self::DRAFT()->value => 'bg-red-500',
-			self::PUBLISHED()->value => 'bg-green-500',
-		};
-	}
-}
+     public function color(): string
+     {
+         return match ($this->value) {
+             self::DRAFT()->value => 'bg-red-500',
+            self::PUBLISHED()->value => 'bg-green-500',
+         };
+     }
+ }

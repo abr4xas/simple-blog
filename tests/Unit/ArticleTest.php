@@ -23,7 +23,7 @@ test('it user can create a post', function () {
     expect($article)->toBeInstanceOf(Article::class);
 });
 
-test('it live scope is working', function() {
+test('it live scope is working', function () {
     $scope = Article::live();
 
     expect($scope)->toBeInstanceOf(Builder::class);

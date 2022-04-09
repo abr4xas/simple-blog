@@ -2,16 +2,16 @@
 
 namespace Abr4xas\SimpleBlog\Traits;
 
-use League\CommonMark\MarkdownConverter;
 use League\CommonMark\Environment\Environment;
-use Torchlight\Commonmark\V2\TorchlightExtension;
-use League\CommonMark\Output\RenderedContentInterface;
-use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
-use League\CommonMark\Extension\Autolink\AutolinkExtension;
-use League\CommonMark\Extension\TaskList\TaskListExtension;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
+use League\CommonMark\Extension\TaskList\TaskListExtension;
+use League\CommonMark\MarkdownConverter;
+use League\CommonMark\Output\RenderedContentInterface;
+use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 trait GenerateMarkDown
 {
