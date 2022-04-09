@@ -2,14 +2,14 @@
 
 namespace Abr4xas\SimpleBlog\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Abr4xas\SimpleBlog\Models\Enums\ArticleStatus;
+use Abr4xas\SimpleBlog\Traits\GenerateMarkDown;
 use Abr4xas\SimpleBlog\Traits\LiveAware;
 use Abr4xas\SimpleBlog\Traits\Sluggable;
-use Abr4xas\SimpleBlog\Traits\GenerateMarkDown;
-use Abr4xas\SimpleBlog\Models\Enums\ArticleStatus;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * App\Models\User

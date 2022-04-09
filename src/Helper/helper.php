@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Http;
 
-if (!function_exists('suggestKeyword')) {
+if (! function_exists('suggestKeyword')) {
     /**
      * Undocumented function
      *
@@ -18,6 +18,7 @@ if (!function_exists('suggestKeyword')) {
         if (($data = $jsonData) !== null) {
             $keywords = $data[1];
         }
+
         return $keywords;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Abr4xas\SimpleBlog\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use Abr4xas\SimpleBlog\Models\Enums\ArticleStatus;
+use Illuminate\Database\Eloquent\Builder;
 
 trait LiveAware
 {
