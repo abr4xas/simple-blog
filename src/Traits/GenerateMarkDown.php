@@ -23,7 +23,7 @@ trait GenerateMarkDown
      */
     public static function convertToHtml(string $markdown): RenderedContentInterface
     {
-        $environment = new Environment();
+        $environment = new Environment(self::configEnv());
 
         $environment->addExtension(new CommonMarkCoreExtension());
 
@@ -45,7 +45,7 @@ trait GenerateMarkDown
             ->convert($markdown);
     }
 
-    private function configEnv()
+    private static function configEnv()
     {
         return [
             'external_link' => [
