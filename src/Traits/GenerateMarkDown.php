@@ -2,12 +2,16 @@
 
 namespace Abr4xas\SimpleBlog\Traits;
 
+use League\CommonMark\MarkdownConverter;
 use League\CommonMark\Environment\Environment;
+use Torchlight\Commonmark\V2\TorchlightExtension;
+use League\CommonMark\Output\RenderedContentInterface;
+use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\TaskList\TaskListExtension;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\MarkdownConverter;
-use League\CommonMark\Output\RenderedContentInterface;
-use Torchlight\Commonmark\V2\TorchlightExtension;
+use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 
 trait GenerateMarkDown
 {
@@ -27,9 +31,31 @@ trait GenerateMarkDown
             $environment->addExtension(new TorchlightExtension());
         }
 
+        $environment->addExtension(new AutolinkExtension());
+
+        $environment->addExtension(new ExternalLinkExtension());
+
         $environment->addExtension(new AttributesExtension());
+
+        $environment->addExtension(new LazyImageExtension());
+
+        $environment->addExtension(new TaskListExtension());
 
         return (new MarkdownConverter($environment))
             ->convert($markdown);
+    }
+
+    private function configEnv()
+    {
+        return [
+            'external_link' => [
+                'internal_hosts' => config('app.url'),
+                'open_in_new_window' => true,
+                'html_class' => 'underline',
+                'nofollow' => '',
+                'noopener' => 'external',
+                'noreferrer' => 'external',
+            ],
+        ];
     }
 }

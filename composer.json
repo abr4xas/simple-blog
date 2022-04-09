@@ -19,6 +19,8 @@
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.4",
+        "league/commonmark": "^2.3",
+        "simonvomeyser/commonmark-ext-lazy-image": "^2.0",
         "spatie/laravel-enum": "^3.0",
         "spatie/laravel-package-tools": "^1.11",
         "spatie/laravel-sluggable": "^3.1",

@@ -15,6 +15,6 @@ trait LiveAware
      */
     public function scopeLive(Builder $builder)
     {
-        return $builder->whereStatus(ArticleStatus::PUBLISHED());
+        return $builder->where('status', '=', ArticleStatus::PUBLISHED());
     }
 }
