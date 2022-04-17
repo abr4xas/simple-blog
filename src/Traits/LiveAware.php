@@ -11,9 +11,9 @@ trait LiveAware
      * Undocumented function
      *
      * @param Builder $builder
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeLive(Builder $builder)
+    public function scopeLive(Builder $builder): Builder
     {
         return $builder->where('status', '=', ArticleStatus::PUBLISHED());
     }

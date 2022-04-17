@@ -3,18 +3,19 @@
 namespace Abr4xas\SimpleBlog\Middleware\Is;
 
 use Closure;
+use Illuminate\Http\Request;
 
 class Live
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param \Closure $next
+     * @param string $model
      * @return mixed
-     * @psalm-suppress MissingParamType
      */
-    public function handle($request, Closure $next, string $model)
+    public function handle($request, Closure $next, string $model): mixed
     {
         if (! $request->{$model}->isPublished()) {
             return abort(404);

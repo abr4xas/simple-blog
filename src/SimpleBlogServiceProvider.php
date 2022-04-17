@@ -2,8 +2,21 @@
 
 namespace Abr4xas\SimpleBlog;
 
+use Abr4xas\SimpleBlog\Middleware\Is\Live;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Str;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Attributes\AttributesExtension;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
+use League\CommonMark\Extension\TaskList\TaskListExtension;
+use League\CommonMark\MarkdownConverter;
+use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class SimpleBlogServiceProvider extends PackageServiceProvider
 {
@@ -26,9 +39,53 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             ]);
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function packageBooted()
     {
-        $router = $this->app->make(\Illuminate\Routing\Router::class);
-        $router->aliasMiddleware('is.live', \Abr4xas\SimpleBlog\Middleware\Is\Live::class);
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('is.live', Live::class);
+    }
+
+    public function bootingPackage()
+    {
+        $this->generateMarkdownMacro();
+    }
+
+    public function generateMarkdownMacro()
+    {
+        Str::macro('markdown', function ($content) {
+
+            $environment = new Environment([
+                'external_link' => [
+                    'internal_hosts' => config('app.url'),
+                    'open_in_new_window' => true,
+                    'html_class' => 'underline',
+                    'nofollow' => '',
+                    'noopener' => 'external',
+                    'noreferrer' => 'external',
+                ],
+            ]);
+
+            $environment->addExtension(new CommonMarkCoreExtension());
+
+            if (! empty(config()->get('torchlight.token'))) {
+                $environment->addExtension(new TorchlightExtension());
+            }
+
+            $environment->addExtension(new AutolinkExtension());
+
+            $environment->addExtension(new ExternalLinkExtension());
+
+            $environment->addExtension(new AttributesExtension());
+
+            $environment->addExtension(new LazyImageExtension());
+
+            $environment->addExtension(new TaskListExtension());
+
+            return (new MarkdownConverter($environment))
+                ->convert($content);
+        });
     }
 }
