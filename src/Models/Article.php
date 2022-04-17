@@ -108,12 +108,12 @@ class Article extends Model
             $key = 'article_' . $this->id . '_' . hash('md5', $this->body);
 
             return Cache::remember($key, 86400, function () {
-                return Str::markdown($this->body);
+                return Str::markdownsb($this->body);
             });
         }
 
         if (app()->environment('local')) {
-            return Str::markdown($this->body);
+            return Str::markdownsb($this->body);
         }
     }
 
