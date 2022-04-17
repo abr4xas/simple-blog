@@ -76,7 +76,6 @@ class Article extends Model
         ];
     }
 
-
     /**
      * @param Builder $query
      * @param array $filters
@@ -117,7 +116,6 @@ class Article extends Model
             return Str::markdown($this->body);
         }
     }
-
 
     /**
      * @return bool
