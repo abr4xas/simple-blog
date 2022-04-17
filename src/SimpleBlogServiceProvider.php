@@ -55,7 +55,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
 
     public function generateMarkdownMacro()
     {
-        Str::macro('markdown', function ($content) {
+        Str::macro('markdownsb', function ($content) {
 
             $environment = new Environment([
                 'external_link' => [
