@@ -1,15 +1,17 @@
 <?php
 
+
  declare(strict_types=1);
 
-namespace Abr4xas\SimpleBlog\Models\Enums;
+ namespace Abr4xas\SimpleBlog\Models\Enums;
 
-use Spatie\Enum\Laravel\Enum;
+ use Spatie\Enum\Laravel\Enum;
 
-/**
- * @method static self DRAFT()
- * @method static self PUBLISHED()
- */
+ /**
+  * @method static self DRAFT()
+  * @method static self PUBLISHED()
+  */
+
 
  class ArticleStatus extends Enum
  {
