@@ -39,9 +39,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             ]);
     }
 
-    /**
-     * @throws BindingResolutionException
-     */
+    /** @throws BindingResolutionException */
     public function packageBooted()
     {
         $router = $this->app->make(Router::class);

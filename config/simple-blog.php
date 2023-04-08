@@ -1,6 +1,5 @@
 <?php
 
-
 return [
-    'bing_apikey' => env('BING_APIKEY')
+    'bing_apikey' => env('BING_APIKEY'),
 ];

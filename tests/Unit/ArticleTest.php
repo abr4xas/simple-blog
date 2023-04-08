@@ -1,15 +1,16 @@
 <?php
 
 use Abr4xas\SimpleBlog\Models\Article;
+use Abr4xas\SimpleBlog\Tests\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 test('it has author type', function () {
     $article = Article::factory()->withAuthor()->create();
-    expect($article->author_type)->toEqual('Abr4xas\SimpleBlog\Tests\Models\User');
+    expect($article->author_type)->toEqual(User::class);
 });
 
 test('it user can create a post', function () {
-    $user = \Abr4xas\SimpleBlog\Tests\Models\User::factory()->create();
+    $user = User::factory()->create();
 
     $article = $user->articles()->create([
         'title' => 'My first fake post',

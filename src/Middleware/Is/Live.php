@@ -7,15 +7,8 @@ use Illuminate\Http\Request;
 
 class Live
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param Request $request
-     * @param \Closure $next
-     * @param string $model
-     * @return mixed
-     */
-    public function handle($request, Closure $next, string $model): mixed
+    /** Handle an incoming request. */
+    public function handle(Request $request, Closure $next, string $model): mixed
     {
         if (! $request->{$model}->isPublished()) {
             return abort(404);

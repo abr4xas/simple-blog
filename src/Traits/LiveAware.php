@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait LiveAware
 {
-    /**
-     * Undocumented function
-     *
-     * @param Builder $builder
-     * @return Builder
-     */
+    /** Undocumented function */
     public function scopeLive(Builder $builder): Builder
     {
         return $builder->where('status', '=', ArticleStatus::PUBLISHED());

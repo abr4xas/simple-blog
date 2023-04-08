@@ -2,26 +2,22 @@
 
 namespace Abr4xas\SimpleBlog\Database\Factories;
 
-use Illuminate\Support\Str;
 use Abr4xas\SimpleBlog\Tests\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     * @var class-string<Model>
      */
     protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    /** Define the model's default state. */
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name,
