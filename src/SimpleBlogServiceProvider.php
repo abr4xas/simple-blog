@@ -2,6 +2,7 @@
 
 namespace Abr4xas\SimpleBlog;
 
+use Abr4xas\SimpleBlog\Extensions\TorchlightWithCopyExtension;
 use Abr4xas\SimpleBlog\Middleware\Is\Live;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Routing\Router;
@@ -29,14 +30,14 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('simple-blog')
-            ->hasConfigFile()
             ->hasMigrations([
                 'create_articles_table',
                 'create_categories_table',
                 'add_category_id_to_articles_table',
                 'add_morph_to_columns_to_articles_table',
                 'create_tags_table',
-            ]);
+            ])
+            ->hasAssets();
     }
 
     /** @throws BindingResolutionException */
@@ -69,6 +70,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
 
             if (! empty(config()->get('torchlight.token'))) {
                 $environment->addExtension(new TorchlightExtension());
+                $environment->addExtension(new TorchlightWithCopyExtension());
             }
 
             $environment->addExtension(new AutolinkExtension());

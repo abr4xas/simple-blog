@@ -43,6 +43,23 @@ $user->articles()->create([
 
 This package uses: [Torchlight](https://torchlight.dev/docs) CommonMark, so, you need an api key to make it work. Follow this docs: https://torchlight.dev/docs/clients/commonmark-php
 
+### If you want to activate the copyable option to torchlight you need to do the following: 
+
+Edit your `config/torchlight.php` file to include the following in the options array:
+
+```
+'options' => [
+   'copyable' => true,
+],
+```
+
+Next, make sure to publish the assets using:
+
+```bash
+php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-assets"
+```
+
+and register the javascript file inside your `app.js` file before the Alpinejs init
 
 ## Testing
 
