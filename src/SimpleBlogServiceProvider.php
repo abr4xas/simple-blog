@@ -17,7 +17,6 @@ use League\CommonMark\MarkdownConverter;
 use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class SimpleBlogServiceProvider extends PackageServiceProvider
 {
@@ -69,7 +68,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             $environment->addExtension(new CommonMarkCoreExtension());
 
             if (! empty(config()->get('torchlight.token'))) {
-//                $environment->addExtension(new TorchlighMtExtension());
+                //                $environment->addExtension(new TorchlighMtExtension());
                 $environment->addExtension(new TorchlightWithCopyExtension());
             }
 
