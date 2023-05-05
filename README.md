@@ -48,26 +48,27 @@ This package uses: [Torchlight](https://torchlight.dev/docs) CommonMark, so, you
 Edit your `config/torchlight.php` file to include the following in the options array:
 
 ```
-'options' => [
-   'copyable' => true,
-],
+'copyable' => true,
 ```
 
-Next, make sure to publish the assets using:
-
-```bash
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simple-blog-assets"
-```
-
-and register the javascript file inside your `app.js` file before the Alpinejs init like this:
+Next, make sure to register this javascript snippet inside your `app.js` file like this:
 
 ```js
 import Alpine from "alpinejs";
-import codeBlock from "./codeBlock";
 
 window.Alpine = Alpine;
 
-Alpine.data("codeBlock", codeBlock);
+Alpine.data("codeBlock", () => ({
+    showMessage: false,
+    copyToClipboard() {
+        text = document.querySelector(".torchlight-copy-target").textContent;
+        navigator.clipboard.writeText(text);
+        // show the "copied" message for 2 seconds
+        this.showMessage = true;
+        setTimeout(() => (this.showMessage = false), 2000);
+    },
+}));
+
 Alpine.start();
 ```
 
