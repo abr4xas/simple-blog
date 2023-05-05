@@ -44,9 +44,9 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('is.live', Live::class);
 
-        $this->publishes([
-            __DIR__.'/resources/dist/js/codeBlock.js' => base_path('resources/js/codeBlock.js'),
-        ], 'simple-blog-assets');
+		$this->publishes([
+			__DIR__ . '/../resources/dist/js/codeBlock.js' => base_path('resources/js/codeBlock.js'),
+		], 'simple-blog-assets');
     }
 
     public function bootingPackage()
