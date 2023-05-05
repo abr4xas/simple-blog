@@ -16,7 +16,7 @@ composer require abr4xas/simple-blog
 You can publish and run the migrations and everything else with:
 
 ```bash
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-migrations"
+php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simple-blog-migrations"
 php artisan migrate
 ```
 
@@ -56,7 +56,7 @@ Edit your `config/torchlight.php` file to include the following in the options a
 Next, make sure to publish the assets using:
 
 ```bash
-php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simpleblog-assets"
+php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simple-blog-assets"
 ```
 
 and register the javascript file inside your `app.js` file before the Alpinejs init
