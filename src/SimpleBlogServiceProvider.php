@@ -2,6 +2,7 @@
 
 namespace Abr4xas\SimpleBlog;
 
+use Abr4xas\SimpleBlog\Extensions\TorchlightWithCopyExtension;
 use Abr4xas\SimpleBlog\Middleware\Is\Live;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Routing\Router;
@@ -16,7 +17,6 @@ use League\CommonMark\MarkdownConverter;
 use SimonVomEyser\CommonMarkExtension\LazyImageExtension;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class SimpleBlogServiceProvider extends PackageServiceProvider
 {
@@ -29,7 +29,6 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('simple-blog')
-            ->hasConfigFile()
             ->hasMigrations([
                 'create_articles_table',
                 'create_categories_table',
@@ -68,7 +67,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             $environment->addExtension(new CommonMarkCoreExtension());
 
             if (! empty(config()->get('torchlight.token'))) {
-                $environment->addExtension(new TorchlightExtension());
+                $environment->addExtension(new TorchlightWithCopyExtension());
             }
 
             $environment->addExtension(new AutolinkExtension());

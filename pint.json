@@ -5,7 +5,18 @@
             "property": "single",
             "const": "single",
             "method": "single"
+        },
+        "no_unused_imports": true,
+        "no_useless_else": true,
+        "function_declaration": true,
+        "single_line_after_imports": true,
+        "array_syntax" :{
+            "syntax": "short"
+        },
+        "concat_space": {
+            "spacing": "none"
         }
+
     },
     "exclude": [
         "build"
