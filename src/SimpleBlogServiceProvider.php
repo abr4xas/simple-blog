@@ -36,8 +36,7 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
                 'add_category_id_to_articles_table',
                 'add_morph_to_columns_to_articles_table',
                 'create_tags_table',
-            ])
-            ->hasAssets();
+            ]);
     }
 
     /** @throws BindingResolutionException */
@@ -45,6 +44,10 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
     {
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('is.live', Live::class);
+
+        $this->publishes([
+            __DIR__.'/resources/dist/js/codeBlock.js' => base_path('resources/js/codeBlock.js'),
+        ], 'simple-blog-assets');
     }
 
     public function bootingPackage()
