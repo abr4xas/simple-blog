@@ -1,7 +1,7 @@
 ## Laravel package to handle a simple blog
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/abr4xas/simple-blog/run-tests.yml?branch=9.x?label=Tests&style=flat-square)](https://github.com/abr4xas/simple-blog/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/abr4xas/simple-blog/run-tests.yml?style=flat-square)](https://github.com/abr4xas/simple-blog/actions)
 [![Total Downloads](https://img.shields.io/packagist/dt/abr4xas/simple-blog.svg?style=flat-square)](https://packagist.org/packages/abr4xas/simple-blog)
 
 
@@ -43,7 +43,7 @@ $user->articles()->create([
 
 This package uses: [Torchlight](https://torchlight.dev/docs) CommonMark, so, you need an api key to make it work. Follow this docs: https://torchlight.dev/docs/clients/commonmark-php
 
-### If you want to activate the copyable option to torchlight you need to do the following: 
+### If you want to activate the copyable option to torchlight you need to do the following:
 
 Edit your `config/torchlight.php` file to include the following in the options array:
 
@@ -59,7 +59,18 @@ Next, make sure to publish the assets using:
 php artisan vendor:publish --provider="Abr4xas\SimpleBlog\SimpleBlogServiceProvider" --tag="simple-blog-assets"
 ```
 
-and register the javascript file inside your `app.js` file before the Alpinejs init
+and register the javascript file inside your `app.js` file before the Alpinejs init like this:
+
+```js
+import Alpine from "alpinejs";
+import codeBlock from "./codeBlock";
+
+window.Alpine = Alpine;
+
+Alpine.data("codeBlock", codeBlock);
+Alpine.start();
+```
+
 
 ## Testing
 

@@ -71,7 +71,6 @@ class SimpleBlogServiceProvider extends PackageServiceProvider
             $environment->addExtension(new CommonMarkCoreExtension());
 
             if (! empty(config()->get('torchlight.token'))) {
-                //                $environment->addExtension(new TorchlighMtExtension());
                 $environment->addExtension(new TorchlightWithCopyExtension());
             }
 
